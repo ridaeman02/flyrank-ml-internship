@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Refresh Opportunity Scoring & Ranking — FlyRank Research</title>
+  <meta name="description" content="A machine learning research paper on predicting content decay and ranking refresh opportunities using 9.8M search performance records.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.3);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --code-bg: #1e1e2e;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px;
+      background: radial-gradient(circle at top, var(--accent-glow), transparent 70%);
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 40px;
+      border-radius: 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(99, 102, 241, 0.2);
+      color: #818cf8;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .meta-line {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .meta-line a {
+      color: #818cf8;
+      text-decoration: none;
+    }
+
+    section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 8px;
+      display: inline-block;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      margin-bottom: 16px;
+      color: #cbd5e1;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .abstract-box {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border-left: 4px solid var(--accent);
+      padding: 24px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin: 20px 0;
+    }
+
+    .metric-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .metric-card .num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--success);
+      margin-bottom: 4px;
+    }
+
+    .metric-card .label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      padding: 16px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+
+    .chart-container {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .chart-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="badge">FLYRANK RESEARCH PAPER</div>
+    <h1>Content Refresh Opportunity Scoring & Ranking</h1>
+    <div class="meta-line">
+      By <strong>FlyRank ML Intern</strong> &bull; Track: Applied Search Intelligence &bull; Repo: <a href="https://github.com/ridaeman02/flyrank-ml-internship" target="_blank">github.com/ridaeman02/flyrank-ml-internship</a>
+    </div>
+  </header>
+
+  <!-- 1. Title + Abstract -->
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract-box">
+      Content decay is a critical challenge for online publishers, where high-performing pages gradually lose organic search visibility over time. This project develops an evidence-backed Machine Learning pipeline to identify and rank declining content pages for editorial refresh prioritization. Using a 9.8M-row daily performance snapshot from the FlyRank warehouse release (March 2026), we engineered client-normalized search signals and evaluated models on a strict client-holdout split (<code>GroupShuffleSplit</code> on <code>client_hash_id</code>). Our Logistic Regression model achieved a <strong>0.5000 Precision@50</strong> score, representing a <strong>19% relative lift</strong> over standard heuristic baseline rules (0.4200 Precision@50) and significantly outperforming the base test set rate (0.2890). The resulting system produces transparent action queues with human-interpretable reason codes to optimize editor review capacity.
+    </div>
+
+    <div class="grid-3">
+      <div class="metric-card">
+        <div class="num">9.8M</div>
+        <div class="label">Warehouse Fact Rows</div>
+      </div>
+      <div class="metric-card">
+        <div class="num">0.5000</div>
+        <div class="label">Precision@50 Score</div>
+      </div>
+      <div class="metric-card">
+        <div class="num">+19%</div>
+        <div class="label">Lift over Baseline Rule</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Introduction / Problem -->
+  <section id="introduction">
+    <h2>1. Introduction & Problem Statement</h2>
+    <p>
+      Managing large content portfolios across dozens of client domains presents a capacity bottleneck: editorial teams cannot manually inspect thousands of pages every week. Simple heuristic rules (such as "refresh any page older than 6 months") generate massive lists of false alarms, wasting valuable writer hours on healthy pages while missing critical traffic decay.
+    </p>
+    <p>
+      This research supports the decision of <strong>which declining pages to review and refresh first</strong>. By framing content refresh as a ranking problem, we predict content decay probabilities and construct a prioritized queue sorted by impact opportunity.
+    </p>
+  </section>
+
+  <!-- 3. Data -->
+  <section id="data">
+    <h2>2. Dataset & Safety</h2>
+    <p>
+      This study utilizes the <strong>FlyRank Pseudonymized Warehouse Release (v20260703)</strong> hosted on Hugging Face. We queried daily performance facts for March 2026 (9,841,378 rows across 70 clients) aggregated at the page level.
+    </p>
+    <ul>
+      <li><strong>Tables Used</strong>: <code>dim_content</code> (page creation dates and metadata) and <code>fact_content_daily_performance</code> (daily impressions, clicks, average position).</li>
+      <li><strong>Public Safety</strong>: All client, content, keyword, and URL identifiers are pseudonymized. No raw names, domains, or unmasked search queries appear anywhere in this work.</li>
+      <li><strong>Deliberate Exclusions</strong>: Product-derived rule flags (such as <code>health_score</code> or <code>priority_score</code>) were excluded to prevent circular reasoning.</li>
+    </ul>
+  </section>
+
+  <!-- 4. Methodology -->
+  <section id="methodology">
+    <h2>3. Methodology & Split Design</h2>
+    <p>
+      We partitioned March 2026 into a <strong>15-day feature window</strong> (March 1–15) and a <strong>16-day outcome window</strong> (March 16–31).
+    </p>
+    <p>
+      <strong>Label Definition</strong>: A page is labeled as declining (<code>is_declining = 1</code>) if its outcome-window impressions drop below 80% of its feature-window impressions.
+    </p>
+    <p>
+      <strong>Validation Design</strong>: We used <code>GroupShuffleSplit</code> grouped on <code>client_hash_id</code> (75% train, 25% test). Holding out entire clients ensures that the model is tested on unseen websites, preventing scale and domain leakage.
+    </p>
+    <p>
+      <strong>Feature Prep</strong>: Impressions and clicks were standardized within each client (<code>imp_norm</code>, <code>clk_norm</code>) to allow model parameters to generalize across websites of different sizes.
+    </p>
+  </section>
+
+  <!-- 5. Results -->
+  <section id="results">
+    <h2>4. Results & Baseline Comparison</h2>
+    <p>
+      We compared <strong>Logistic Regression</strong> and <strong>Random Forest</strong> models against a heuristic baseline rule (pages older than 180 days ranking on page 1 or 2). All methods were evaluated on the same client-holdout split using ROC-AUC and Precision@50.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>ROC-AUC</th>
+          <th>Precision@50</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Base Rate (Random Guessing)</td>
+          <td>0.2890</td>
+          <td>0.2890</td>
+        </tr>
+        <tr>
+          <td>Baseline Heuristic Rule</td>
+          <td>0.5232</td>
+          <td>0.4200</td>
+        </tr>
+        <tr>
+          <td><strong>Logistic Regression</strong></td>
+          <td><strong>0.5334</strong></td>
+          <td><strong>0.5000</strong></td>
+        </tr>
+        <tr>
+          <td>Random Forest Classifier</td>
+          <td>0.5394</td>
+          <td>0.3800</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="chart-container">
+      <img src="https://raw.githubusercontent.com/ridaeman02/flyrank-ml-internship/main/outputs/charts/feature_importance.png" alt="Feature Importance Chart" onerror="this.src='../outputs/charts/feature_importance.png'">
+      <div class="caption">Figure 1: Feature importances from Random Forest model highlighting content age and normalized clicks.</div>
+    </div>
+  </section>
+
+  <!-- 6. Limitations -->
+  <section id="limitations">
+    <h2>5. Limitations & Honest Framing</h2>
+    <ul>
+      <li><strong>Observational Data</strong>: This research measures historical correlation. It does not claim causal proof that refreshing a page guarantees a specific traffic increase.</li>
+      <li><strong>Short Outcome Windows</strong>: A 15-day outcome window includes natural traffic volatility, which introduces noise into binary decline labels.</li>
+      <li><strong>Unbalanced Client History</strong>: Client tracking start dates vary across the warehouse dataset.</li>
+    </ul>
+  </section>
+
+  <!-- 7. Ranked Recommendations -->
+  <section id="recommendations">
+    <h2>6. Ranked Recommendations Queue</h2>
+    <p>
+      The system generates a combined action score (<code>0.7 * lr_prob + 0.3 * baseline_score</code>) paired with human-readable reason codes:
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Content Hash ID</th>
+          <th>Client Hash ID</th>
+          <th>Final Score</th>
+          <th>Reason Code</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>content_cd3d932d4e1c8db0</code></td>
+          <td><code>client_9958f0a7</code></td>
+          <td>99.91</td>
+          <td><code>stale_visible_page</code></td>
+        </tr>
+        <tr>
+          <td><code>content_fc0d3723ce5a9bba</code></td>
+          <td><code>client_fef1a8f4</code></td>
+          <td>73.13</td>
+          <td><code>stale_visible_page</code></td>
+        </tr>
+        <tr>
+          <td><code>content_783a9715094029de</code></td>
+          <td><code>client_fef1a8f4</code></td>
+          <td>70.82</td>
+          <td><code>stale_visible_page</code></td>
+        </tr>
+        <tr>
+          <td><code>content_ba462518dad435fc</code></td>
+          <td><code>client_fef1a8f4</code></td>
+          <td>65.90</td>
+          <td><code>model_decline_risk</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. Reproducibility -->
+  <section id="reproducibility">
+    <h2>7. Reproducibility & Code</h2>
+    <p>
+      All experiments can be reproduced from the GitHub repository using the following commands:
+    </p>
+    <div class="code-block">
+git clone https://github.com/ridaeman02/flyrank-ml-internship.git
+cd flyrank-ml-internship
+pip install -r requirements.txt
+python scratch/run_notebook.py work/notebooks/capstone.ipynb
+    </div>
+    <p>
+      Random seeds were fixed at <code>random_state=42</code> across all data splits and models.
+    </p>
+  </section>
+
+  <!-- 9. Acknowledgments & data credit -->
+  <section id="acknowledgments">
+    <h2>8. Acknowledgments & Data Credit</h2>
+    <p>
+      Built on the <strong>FlyRank ML Internship dataset</strong> — available at <a href="https://flyrank.ai" target="_blank" rel="noopener">https://flyrank.ai</a>.
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  <p>&copy; 2026 FlyRank ML Internship Project. Released under MIT License for code.</p>
+</footer>
+
+</body>
+</html>
