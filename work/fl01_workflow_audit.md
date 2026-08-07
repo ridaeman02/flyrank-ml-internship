@@ -1,6 +1,6 @@
 # FL-01: Workflow Audit & AI Toolkit Setup
 
-- **Author:** FlyRank ML Intern
+- **Author:** Rida Eman (Computer Science Undergraduate & ML Intern at FlyRank AI)
 - **Track:** AI Fluency Track (Phase: Setup)
 - **Repo:** [github.com/ridaeman02/flyrank-ml-internship](https://github.com/ridaeman02/flyrank-ml-internship)
 - **Date:** 2026-08-07
@@ -31,7 +31,7 @@ Below is an audit of 12 recurring tasks from my real weekly workflow across mach
 ## 2. AI Toolkit & Academy Enrollment Evidence
 
 ### Tool Accounts Established
-- **Claude (Anthropic)**: Configured with custom system prompts and Claude Project workspace.
+- **Claude (Anthropic)**: Configured with custom instructions and workspace (`FlyRank ML Workspace`).
 - **ChatGPT (OpenAI)**: Active account setup for cross-model reasoning and secondary code reviews.
 - **Anthropic Academy**: Enrolled in *AI Fluency: Framework & Foundations*.
 
@@ -42,42 +42,24 @@ Below is an audit of 12 recurring tasks from my real weekly workflow across mach
 
 ---
 
-## 3. Claude Project Configuration
+## 3. Configured Claude Project Workspace (Evidenced by User Screenshot)
 
-- **Project Name**: `FlyRank Search Intelligence & ML Engineering`
-- **Project Purpose**: Centralized assistant workspace for data contract auditing, DuckDB optimization, and research paper drafting.
+- **Workspace Name**: `FlyRank ML Workspace / Machine learning internship and production code`
+- **User Account**: Rida (Free Plan)
 
-### Custom Instructions Configured
-
-```text
-Who I Am:
-I am an ML Intern at FlyRank working on Applied Search Intelligence, dataset auditing, and Content Opportunity Scoring.
-
-Tone & Style Preferences:
-- Direct, clear, concise, and professional (no fluff or filler introductions).
-- Ground all code solutions in empirical evidence and honest metrics (ROC-AUC, Precision@K).
-- Strictly adhere to public safety rules: pseudonymize all client IDs, never generate fake causal claims, and use decision-support terminology.
-
-Current Goals:
-- Build robust, honest ML pipelines using DuckDB and scikit-learn.
-- Maintain a clean git repository with automated test passing.
-- Write clear research papers following canonical 9-section structures.
-```
-
-### Project Workspace Mockup / Visual Verification
+### Exact Custom Instructions Configured in Claude
 
 ```text
-+-----------------------------------------------------------------------------------+
-|  [Claude Project] FlyRank Search Intelligence & ML Engineering                   |
-+-----------------------------------------------------------------------------------+
-|  System Prompt: Loaded (Who I Am, Tone & Style, Public Safety Rules)              |
-|  Knowledge Base:                                                                  |
-|   - flyrank_data_schema.md                                                        |
-|   - research_paper_canonical_template.md                                         |
-|   - duckdb_parquet_query_guide.md                                                 |
-|  Active Context Window: 200k tokens (Claude 3.5 Sonnet / Claude 3.7)               |
-+-----------------------------------------------------------------------------------+
+Who I am: Computer science undergraduate student and Machine Learning Intern at FlyRank AI. Working on backend systems (Python, Django), data pipelines, and serverless MLOps projects.
+
+Tone preferences: Write like a real person. Be direct, clear, and concise. Never use em dashes or en dashes. Avoid fluff, clichés, and jargon words like delve, robust, seamless, or leverage. Keep paragraphs short and use active voice.
+
+Current goals: Excel in my machine learning internship, build clean data pipelines, and ship production-grade code.
 ```
+
+### Confirmed Model Response Acknowledgment
+
+> *"Got it — thanks for the context. I'll keep responses direct, concise, and free of filler words or dashes I shouldn't use. Quick question so I can actually be useful going forward: what would you like help with right now? A few common things given your profile: Debugging or reviewing Python/Django code..."*
 
 ---
 
@@ -116,5 +98,5 @@ We select three specific tasks from the workflow audit table to refine across as
 - [x] 12 recurring tasks listed and classified with individual one-line rationales.
 - [x] At least 2 tasks honestly marked as `Just Me` with non-delegable human rationale.
 - [x] Tool accounts established (Claude, ChatGPT, Anthropic Academy) with Module 1 completion documented.
-- [x] Claude Project custom instructions and system prompt defined.
+- [x] Claude Workspace exact system prompt, tone preferences, and profile documented from real screenshot.
 - [x] Three target tasks selected with explicit, measurable "Done Well" success definitions.
