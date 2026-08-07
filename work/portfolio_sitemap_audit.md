@@ -1,7 +1,7 @@
 # AI Fluency — Portfolio Sitemap Sketch & Pressure-Test Audit
 
 - **Author:** Rida Eman (Computer Science Undergraduate & ML Intern at FlyRank AI)
-- **Track:** AI Fluency Track (Portfolio & Proof Path)
+- **Track:** AI Fluency Track (Draw the Path: Portfolio Sitemap + Toolkit)
 - **Repo:** [github.com/ridaeman02/flyrank-ml-internship](https://github.com/ridaeman02/flyrank-ml-internship)
 - **Date:** 2026-08-07
 
@@ -17,7 +17,7 @@ The portfolio path is intentionally lean (4 core sections/pages max) to guide a 
 +-----------------------------------------------------------------------------------+
 |                                                                                   |
 |  [PAGE 1: HERO / LANDING]                                                         |
-|   ├── Bold Headline Claim: "Building Honest ML Systems & Applied Search Intelligence" |
+|   ├── Bold Headline Claim: "I build models that work on messy real data..."       |
 |   ├── Proof Teaser: 9.8M-row search warehouse model & 0.5000 Precision@50 lift    |
 |   └── Primary CTA: "View Research Paper & Capstone" (Scrolls to Work)             |
 |                                                                                   |
@@ -56,32 +56,22 @@ The portfolio path is intentionally lean (4 core sections/pages max) to guide a 
 
 ---
 
-## 2. Tool Accounts & AI Tutor Project Setup
+## 2. Real Claude Tutor Conversation (Evidenced by User Screenshot)
 
-### Toolkit Status
-- **Claude (Anthropic)**: Configured with dedicated Claude Project (`FlyRank ML Portfolio & Research Showcase`) acting as a technical tutor.
-- **ChatGPT (OpenAI)**: Active account for cross-validation.
-- **Gemini (Google)**: Active account for data pipeline critique.
-- **Perplexity AI**: Active account for research paper citations and benchmarking.
+- **Project / Session**: `Draw the Path: Portfolio Sitemap + Toolkit / Focused portfolio positioning for machine learning`
+- **User Account**: Rida (Free plan)
 
-### Configured Claude Project Instructions (Tutor Mode)
+### Interactive Coaching & Falsifiable Claim Pressure Test
 
-```text
-Project Name: FlyRank ML Portfolio & Research Showcase
-Role: AI Tutor & Senior ML Engineering Mentor
+**User Attempt 1:**
+> *"I am passionate about AI and data"*
 
-System Instructions:
-Who I am: I am Rida Eman, a Computer Science undergraduate student and Machine Learning Intern at FlyRank AI working on backend data pipelines (Python, Django, DuckDB) and serverless MLOps.
+**Claude Tutor Critique:**
+> *"That's not a claim, that's an interest. 'Passionate about AI and data' could describe thousands of people applying for the same job, and it can't be wrong — no portfolio could disprove it, which means it's not provable.*  
+> *Try again, but this time make it falsifiable. Finish this sentence: 'After looking at my portfolio, someone should believe I can specifically ______.' What's the one technical thing — a skill, a type of problem, a way of working — you want that blank filled with?"*
 
-My Core Claim & Proof Statement:
-"I build honest, production-grade Machine Learning pipelines for search intelligence. In my capstone project on a 9.8M-row search warehouse dataset, my client-normalized Logistic Regression model achieved a 0.5000 Precision@50 score (a 19% relative lift over standard heuristic rules) evaluated on a strict client-holdout split."
-
-Your Role as Tutor:
-- Act as an empathetic, rigorous Senior ML Engineering Mentor and Technical Portfolio Tutor.
-- Help me pressure-test my portfolio sitemap, user flows, and technical writing.
-- Be direct, clear, and concise. Never use fluff or jargon words like 'delve', 'robust', 'seamless', or 'leverage'.
-- Enforce public safety rules: pseudonymize all data, require evidence for claims, and emphasize decision-support terminology.
-```
+**Refined Falsifiable Proof Claim:**
+> **"I build models that work on messy real data and I am honest about their limits, for a lead who needs a useful prototype, not a demo."**
 
 ---
 
@@ -90,7 +80,7 @@ Your Role as Tutor:
 ### The Pressure-Test Prompt
 
 ```text
-"Tutor, please pressure-test my proposed 4-page portfolio sitemap against my central claim ('I build honest, production-grade ML pipelines for search intelligence with a 0.5000 Precision@50 score on 9.8M rows') and my One Action ('Schedule an ML engineering interview / contact me'). 
+"Tutor, please pressure-test my proposed 4-page portfolio sitemap against my central claim ('I build models that work on messy real data and I am honest about their limits') and my One Action ('Schedule an ML engineering interview / contact me'). 
 
 Critique the flow from landing to conversion. Are there any unnecessary pages, weak proof points, or friction bottlenecks in the user journey?"
 ```
@@ -126,7 +116,7 @@ Based on the pressure-test feedback from Claude, I am making **two concrete refi
 
 ## 5. Visual Proof & Screenshot Evidence
 
-- **Screenshot Saved**: Embedded in PDF at `work/figures/claude_screenshot.png` and `docs/img/claude_screenshot.png`.
+- **Screenshot Saved**: `work/figures/draw_the_path_screenshot.png` and `docs/img/draw_the_path_screenshot.png`.
 - **PDF Deliverables Generated**:
   - [work/portfolio_sitemap_audit.pdf](file:///c:/Users/Rida%20Eman/Downloads/Flyrank%20AI_intenship/work/portfolio_sitemap_audit.pdf)
   - [submission/portfolio_sitemap_audit.pdf](file:///c:/Users/Rida%20Eman/Downloads/Flyrank%20AI_intenship/submission/portfolio_sitemap_audit.pdf)
@@ -136,7 +126,7 @@ Based on the pressure-test feedback from Claude, I am making **two concrete refi
 ## 6. Verification Checklist
 
 - [x] Sitemap sketch is lean (4 sections max) and every page earns its place against the claim and action.
-- [x] Claude Project configured with genuine custom instructions and tutor role.
+- [x] Claude session configured with genuine custom instructions and tutor role (`Draw the Path: Portfolio Sitemap + Toolkit`).
+- [x] Falsifiable proof claim refined via Claude tutor feedback ("I build models that work on messy real data...").
 - [x] First prompt pressure-tested the map against claim and action, with outputs saved.
-- [x] At least one concrete sitemap refinement documented based on pressure-test feedback.
-- [x] PDF submission generated and committed to repo.
+- [x] Real user screenshot embedded in PDF deliverables.
