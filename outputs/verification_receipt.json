@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "checks_passed": 4,
+  "checks_failed": 0,
+  "details": [
+    {
+      "check": "Starter Dataset File Exists",
+      "status": "PASS",
+      "rows": 30000
+    },
+    {
+      "check": "Zero Data Leakage Guard",
+      "status": "PASS",
+      "forbidden_used": 0
+    },
+    {
+      "check": "Schema & Null Bounds",
+      "status": "PASS",
+      "null_counts": {
+        "impressions_90d": 0,
+        "sessions_90d": 0,
+        "content_age_days": 0
+      }
+    },
+    {
+      "check": "Model Precision@50 Lift Over Base Rate",
+      "status": "PASS",
+      "base_rate": 0.289,
+      "precision_at_50": 0.5
+    }
+  ]
+}
